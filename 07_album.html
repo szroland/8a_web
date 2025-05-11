@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/loader.js"></script>
+
+    <title>Kedvenc albumjaim</title>
+</head>
+<body>
+<!--
+
+Készíts egy táblázatot a kedvenc albumaidról!
+
+Lentebb találsz mintaadatot, de hasznáhatsz mást is.
+
+    ✅ Legyen egy h1 címe a weblapnak
+    ✅ Késztíts egy táblázatot 3 oszloppal, az első sor a fejléc: Album címe, borító kép, és számok listája
+    ✅ Az album címe sima szöveg (de természetesen mást is tehetsz ide)
+    ✅ A borító oszlopba egy képet kell belinkelni. Képet az <IMG> tag segítségével rakhatsz be, az SRC attributuma a kép forrása (Source).
+
+    ✅ A harmadik oszlopba az albumon levő számok listája kerül.
+        Számozott listát használj. A lista elemei a szám címét és hosszát tartalmazza. 
+        
+        ⛏️ Az előre beállított stílusok ezt a kettőt a cella két oldalra igazítja és pontozott vonallal összeköti, 
+        de ehhez az szükséges, hogy a lista elemen belül a szám címe és a hossza el legyen különítve külön html elemekbe.
+
+        Ehhez bármilyen un. inline elemet, vagy azok kombinációját használhatod, pl:
+            ◾️ <span> ez csak egybefogja a szöveget, nem formázza
+            ◾️ <u>,<i>,<b> tanult formázások
+            ◾️ <em>,<code>,<cite>,<sub>,<sup>,<small> stb. ezekkel is kísérletezhetsz (https://www.w3schools.com/html/html_blocks.asp)
+
+        ⛏️ Tehát egy lista elem (egy szám adatai az albumon) kb. így néz ki pl. span-ek használatával:
+            <li>
+                <span>Szám címe</span>
+                <span>9:99</span>
+            </li>
+ 
+Opcionális:
+    ✅ Az első oszlopba helyezz el linkeket pl. a wikipédiára, vagy más releváns weboldalra.
+    ✅ Kíséreltezz a stíluslap módosításával, ha van kedved pl. a színeket, méreteket módosítani
+
+-->
+
+Kedvenc albumjaim
+
+Cím Borító Számok
+
+<!-- Ezek minta adatok albumokhoz: előadó/album, borító kép url, és számok listája-->
+Taylor Swift: Fearless
+https://upload.wikimedia.org/wikipedia/en/f/ff/Taylor_Swift_-_Fearless_%28International_Version%29.png
+
+Fearless                4:01
+Fifteen                 4:54
+Love Story              3:55
+Hey Stephen             4:14
+White Horse             3:54
+You Belong with Me      3:51
+Breathe                 4:23
+Tell Me Why             3:20
+You're Not Sorry        4:21
+The Way I Loved You     4:03
+Forever & Always        3:45
+The Best Day            4:05
+Change                  4:40
+
+<!-- Másik album -->
+Taylor Swift: Red
+https://upload.wikimedia.org/wikipedia/en/e/e8/Taylor_Swift_-_Red.png
+State of Grace                      4:55
+<b style='color:red'>Red</b>        3:43
+Treacherous                         4:40
+I Knew You Were Trouble             3:40
+All Too Well                        5:29
+<!-- Van még pár szám ezen az albumon... -->
+
+<!-- Következő album ... -->
+
+<!-- Idáig tarthat a táblázat, lentebb már csak a stílusok találhatóak. Ha van kedved, módosíthatsz ezeken -->
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    color: #333;
+}
+
+/* Title Styling */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #1e1e1e;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: auto;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #ffcc99;
+    font-size: 1.2rem;
+    color: #333;
+    /*text-transform: uppercase;*/
+    font-variant: small-caps;
+}
+
+td {
+    background-color: inherit;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    vertical-align: top;
+}
+
+td:nth-child(2) {
+    text-align: center;
+}
+
+th:nth-child(3) {
+    width: 50%;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+tr:nth-child(odd) {
+    background-color: #f7f7f7;
+}
+
+tr {
+    counter-reset: track; 
+}
+
+/* Cover Image Styling */
+img {
+    width: 200px;
+    height: auto;
+    border-radius: 16px;
+}
+
+/* Track List Styling */
+ol {
+    list-style-type: none;  /* Remove default list style */
+    color: #555;
+    font-family: 'Courier New', monospace;  /* Monospace font for the track list */
+    background-color: inherit;
+}
+
+ol li {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: inherit;
+}
+
+ol li *:not(last-child) {
+    text-align: right;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+    z-index: 2;  /* Keeps track length above the dashed line */
+    background-color: inherit;
+}
+
+/* Track length span */
+ol li *:last-child {
+    text-align: right;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+    z-index: 2;  /* Keeps track length above the dashed line */
+    background-color: inherit;
+    margin-left: auto;
+}
+
+ol li::before {
+    content: counter(track) ". ";  /* Track number */
+    counter-increment: track;  /* Increments the counter for each list item */
+    width: 2rem;  /* Reserved space for the number */
+    text-align: right;
+    padding-right: 0px;
+    font-weight: bold;
+    background-color: inherit;
+    z-index: 2; 
+}
+
+ol li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed #555;
+    top: 50%;
+    z-index: 0; /* Ensures the dashed line stays behind the text */
+    font-family: 'Courier New', monospace; 
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    table th, table td {
+        padding: 10px;
+    }
+
+    img {
+        width: 100px;
+    }
+}
+    
+</style>
+
+
+</body>
+</html>

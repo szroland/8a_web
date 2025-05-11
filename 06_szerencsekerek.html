@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/loader.js"></script>
+
+    <title>Szerencsekerék</title>
+</head>
+<body>
+<!--
+    A szerencsekerék játék egyszerűsített változatát fogjuk elkészíteni.
+    A játékos feladata, hogy adott kategóriába tartozó mondatot, vagy kifejezést kitaláljon. 
+    Megadhat betűket, és ha az a betű benne van a kifejezésben, akkor felfedésre kerül. Kezdetben minden betű rejtve van.
+
+    Feladat:
+    ✅ Emeld ki a játék címét <h1> használatával
+    ✅ Emeld ki a kategóriát <h2> használatával
+
+    ✅ A kitalálandó kifejezés betűi kerüljenek egy táblázat egy-egy cellájába
+    ✅ Legalább két soros kifejezést használj! 
+    
+    ⛏️ Az üres cellák szürkén jellennek meg, ha pedig írásjeleket, vagy más, állandóan 
+    látszó elemet akarsz elhelyezni, akkor használj <th> elemeket (Table Header = táblázat fejléc)
+
+    A játék megjelenéséhez szükséges stílusok, illetve kódok már megtalálhatóak a html fájl vége felé.
+    Ezeket nem muszáj módosítanod, de ha szeretnéd, nyugodtan próbálkozhatsz.
+
+-->
+
+<!-- Ez a játék címe-->
+Szerencsekerék
+
+<!-- Ez a kategória-->
+🐹 Nyelvtörő 🐹
+
+<!-- Idejön a táblázat, amiből a játéktér készül -->
+SZŐRÖS HÖRCSÖG SZÖRPÖT
+SZÖRCSÖG, RÁTÖRNEK A
+HÖRCSÖG GÖRCSÖK.
+
+
+<!-- Idáig tarthat a táblázat, lentebb már a stílusok és a vezérlő program található. -->
+
+<!--
+Ezek a stílusok állítják be a címek, és a táblázat elemeinek stílusát, hogy a végeredmény jól nézzen ki.
+Az ilyen stílusokról később még lesz szó, de lehet, hogy pl. a színeket, méreteket már most is megtalálod benne, 
+és megpróbálhatod átállítani.
+-->
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #fff;
+        text-transform: uppercase;
+        background: linear-gradient(to right, #ff6f61, #ff9f43);
+        padding: 10px 40px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        text-transform: capitalize;
+        background-color: #fff;
+        padding: 10px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    h2:hover {
+        transform: scale(1.05);
+        background-color: #ff9f43;
+        color: #fff;
+    }
+
+    table {
+        margin: auto;
+        border-collapse: separate;
+        border-spacing: 10px; /* Cellák közötti hely */
+    }
+
+    th {
+        text-align: center;
+        font-weight: bold;
+        font-size: 36px;
+        width: 60px;
+        height: 80px;
+    }
+
+    /* Cella alap stílusa */
+    td {
+        width: 60px;
+        height: 80px;
+        border: 3px solid black;
+        text-align: center;
+        font-weight: bold;
+        font-size: 36px; /* betű méret */
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden; 
+        background-color: navy; /* Shaded background */
+        color: transparent; /* Kezdetben a szín átlástszó, így nem látszik a betű */
+
+        /* animáció állítja a színt és a hátteret, 1s az időtartam */
+        transition: color 1s ease-in-out, background-color 1s ease-in-out; 
+    }
+
+    /* Az átfordított betű stílusa */
+    td.felfedve {
+        color: black; 
+        background-color: rgb(255, 244, 208); 
+    }
+
+    /* Üres cella stílusa */
+    td:empty {
+        background: #eeeeee;
+        border: 3px dashed lightgrey;
+    }
+
+    input {
+        font-size: 20px;
+        padding: 5px;
+        width: 50px;
+        text-align: center;
+        margin: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+
+    /* Siker üzenet */
+    #success-message {
+        display: none;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #fff;
+        background-color: #4CAF50; /* Green background */
+        padding: 20px 40px;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 30px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 2s ease-out forwards;
+    }
+
+    /* Siker üzenet megjelenés animáció */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+</style>
+
+<!--
+Beviteli mező a betű megadásához, valamint egy gomb. Megnyomáskor az alul levő javascript függvény végignézi
+az összes TD elemet, és aminek a tartalma megegyezik a megadottal, azt átállítja "felfedve" stílusra.
+
+-->
+<div id="success-message">
+    Gratulálunk, kitaláltad!
+</div>
+
+<div>
+    <input type="text" id="guessInput" maxlength="1" placeholder="A-Z">
+    <button onclick="revealLetters()">Mutasd!</button>
+</div>
+
+<script>
+    function revealLetters() {
+        let guess = document.getElementById("guessInput").value.toUpperCase();
+        if (guess === "") return; // Ignore empty input
+
+        document.querySelectorAll("td").forEach(td => {
+            if (td.textContent.toUpperCase() === guess) {
+                td.classList.add("felfedve");
+            }
+        });
+        const rev = document.querySelectorAll('td.felfedve').length 
+        const all = document.querySelectorAll('td:not(empty)').length;
+        if (all > 0 && all === rev) {
+            showSuccessMessage();
+        }
+    }
+
+    function showSuccessMessage() {
+        const successMessage = document.getElementById('success-message');
+        successMessage.style.display = 'block';
+    }
+
+</script>
+
+</body>
+</html>

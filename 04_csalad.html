@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/loader.js"></script>
+
+    <title>Család</title>
+</head>
+<body>
+<!--
+
+Táblázatokat a <table> tag segítségével hozunk létre. 
+    Alapból nincsenek keretei a cellának, stílusokkal precízen testre szabható a kinézete, de erről később fogunk tanulni.
+    Egyelőre állítunk be egy egyszerű keretet a border="1" attributum segítségével.
+
+A táblázatnak sorai vannak, ezeket <tr> tag-ekkel (Table Row) hozhatjuk létre.
+A soron belül vannak a cellák, ezek lehetnek kiemelt, fejléc jellegű cellák: <th> (Table Header), 
+    vagy sima adat cellák: <td> (Table Data) 
+
+Ha kíváncsi vagy, itt van pár példa táblázat: http://www.w3schools.com/Tags/tag_table.asp
+A táblázatnak sok további lehetősége és strukturális eleme van. Egy teljesebb példa látható például itt:
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table
+
+✅ Írd be a saját neved a táblázat fejlécét követő első sorba
+✅ Kapcsold be a kereteket a táblázaton
+✅ A minta alapján adj sorokat a táblázathoz, vedd fel legalább 2 családtagodat, rokonodat, kedvenc háziállatodat stb.
+
+Opcionális feladatok:
+✅ Próbálj valamilyen új adatot megadni egy új oszlopba (pl. születésnap, kedvenc zenekar, stb.)
+✅ Válassz mindenkinek a neve mellé valamilyen emojit, pl. itt nézelődhetsz: https://en.wikipedia.org/wiki/List_of_emojis
+
+-->
+
+<h1>Család</h1>
+<table>
+    <tr>
+        <!-- ez egy sor, és csak fejléceket tartalmaz -->
+        <th>Név</th>
+        <th>Rokonság</th>
+        <th>Életkor</th>
+    </tr>
+    <tr>
+        <td>nevem</td>
+        <td>én</td>
+        <td>18</td>
+    </tr>
+    <tr>       
+        <!-- ez egy sor, csak még nincsenek benne cellák -->
+    </tr>
+    <!-- itt lehetnek további sorok -->
+</table>
+
+</body>
+</html>
