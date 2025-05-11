@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/loader.js"></script>
+
+    <title>Sakk</title>
+</head>
+<body>
+<!--
+
+✅Táblázat segítségével készíts el egy sakktáblát.
+A sakktáblán a bábukhoz használhatod a lenti emoji-kat.
+
+A táblázatnak most ne legyen kerete!
+
+⛏️ Hogy szebb eredményt kapjunk, előre be van állítva pár stílus, ami megszínezi és átméretezi 
+négyzet alakúra a táblázat celláit. Neked elég most a struktúrára koncentrálnod.
+
+❓️ Sok cellát kell létrehozni, hogyan lehet ezt hatékonyan csinálni?
+-->
+<table>
+<tr><td>♜</td><td>♞</td><td>♝</td><td>♛</td><td>♚</td><td>♝</td><td>♞</td><td>♜</td></tr>
+<tr><td>♟</td><td>♟</td><td>♟</td><td>♟</td><td>♟</td><td>♟</td><td>♟</td><td>♟</td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>♙</td><td>♙</td><td>♙</td><td>♙</td><td>♙</td><td>♙</td><td>♙</td><td>♙</td></tr>
+<tr><td>♖</td><td>♘</td><td>♗</td><td>♕</td><td>♔</td><td>♗</td><td>♘</td><td>♖</td></tr>
+</table>
+
+
+<!-- Idáig tarthat a táblázat, lentebb már a stílusok és a vezérlő program található. -->
+
+<!-- 
+    ☢️ Ezek a stílus definíciók formázzák meg a táblázatot.
+    ⛏️ Ha szeretnéd, megpróbálhatod módosítani a különböző értékeket és figyeld meg, mi változik.
+ -->
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    table {
+        border-collapse: collapse;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    }
+    td {
+        width: 64px;
+        height: 64px; 
+        text-align: center;
+        font-size: 48px;
+        padding: 0px;
+    }
+    tr:nth-child(even) td:nth-child(odd),
+    tr:nth-child(odd) td:nth-child(even) {
+        background-color: #b58863;
+    }
+    tr:nth-child(even) td:nth-child(even),
+    tr:nth-child(odd) td:nth-child(odd) {
+        background-color: #f0d9b5;
+    }
+
+</style>
+
+</body>
+</html>
